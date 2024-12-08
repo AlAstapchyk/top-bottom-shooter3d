@@ -3,9 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    public GameObject comicPanel;
+
     public void StartButton()
     {
-        SceneManager.LoadSceneAsync(1);
+        ShowComic();
     }
 
     public void ExitButton()
@@ -15,5 +17,17 @@ public class ButtonManager : MonoBehaviour
         #else
         Application.Quit(); 
         #endif
+    }
+
+    private void ShowComic()
+    {
+        if (comicPanel != null)
+        {
+            comicPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Comic panel is not assigned in the ButtonManager!");
+        }
     }
 }
