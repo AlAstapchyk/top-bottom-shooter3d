@@ -9,6 +9,7 @@ public class WeaponHolder : MonoBehaviour
 
     private void Start()
     {
+        
         if (weapons.Count > 0)
         {
             EquipWeapon(0); // Equip the first weapon by default
@@ -21,6 +22,17 @@ public class WeaponHolder : MonoBehaviour
     {
         if (weapons[currentWeaponIndex] is IReloadable reloadableWeapon)
             reloadableWeapon.Reload();
+    }
+    public void AttackWithReload()
+    {
+        if (weapons[currentWeaponIndex] is IReloadable reloadableWeapon)
+        {
+            if (reloadableWeapon.currentMagAmmo == 0)
+            {
+                reloadableWeapon.Reload();
+            }
+        }
+        weapons[currentWeaponIndex]?.Attack();
     }
 
     public void SwitchWeaponByIndex(int index)

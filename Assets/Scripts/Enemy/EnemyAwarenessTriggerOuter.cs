@@ -13,7 +13,9 @@ public class EnemyAwarenessTriggerOuter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            enemyMovement.TriggerPatrolState();
+            enemyMovement.StopRaycasting();
+            //Debug.Log("Player left Awareness...");
+            //enemyMovement.TriggerPatrolState();
         }
     }
 }

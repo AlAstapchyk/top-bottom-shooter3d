@@ -12,6 +12,11 @@ public class EnemyAwarenessTriggerInner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        { enemyMovement.TriggerChaseState(); }
+        {
+            //Debug.Log("Player entered Awareness!!!");
+            enemyMovement.StartRaycasting();
+            //enemyMovement.TriggerChaseState();
+            //Debug.Log("Trigger enter");
+        }
     }
 }

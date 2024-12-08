@@ -42,6 +42,7 @@ public class PlayerWeaponControls : MonoBehaviour
         playerActions.ChooseFirstWeapon.performed += context => SwitchWeaponByIndex(0);
         playerActions.ChooseSecondWeapon.performed += context => SwitchWeaponByIndex(1);
         playerActions.ChooseThirdWeapon.performed += context => SwitchWeaponByIndex(2);
+        playerActions.ChooseFourthWeapon.performed += context => SwitchWeaponByIndex(3);
     }
 
     private void DisableInput()
@@ -54,6 +55,7 @@ public class PlayerWeaponControls : MonoBehaviour
         playerActions.ChooseFirstWeapon.performed -= context => SwitchWeaponByIndex(0);
         playerActions.ChooseSecondWeapon.performed -= context => SwitchWeaponByIndex(1);
         playerActions.ChooseThirdWeapon.performed -= context => SwitchWeaponByIndex(2);
+        playerActions.ChooseFourthWeapon.performed -= context => SwitchWeaponByIndex(3);
 
         playerActions.Disable();
     }

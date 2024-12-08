@@ -98,6 +98,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChooseFourthWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""e4c3b171-6f7f-40a3-854c-f33fd538b994"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -417,6 +426,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ChooseThirdWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bf318cf-0a5f-4cbf-a59e-48d90ef9b07b"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseFourthWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -951,6 +971,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_ChooseFirstWeapon = m_Player.FindAction("ChooseFirstWeapon", throwIfNotFound: true);
         m_Player_ChooseSecondWeapon = m_Player.FindAction("ChooseSecondWeapon", throwIfNotFound: true);
         m_Player_ChooseThirdWeapon = m_Player.FindAction("ChooseThirdWeapon", throwIfNotFound: true);
+        m_Player_ChooseFourthWeapon = m_Player.FindAction("ChooseFourthWeapon", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1038,6 +1059,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChooseFirstWeapon;
     private readonly InputAction m_Player_ChooseSecondWeapon;
     private readonly InputAction m_Player_ChooseThirdWeapon;
+    private readonly InputAction m_Player_ChooseFourthWeapon;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1050,6 +1072,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @ChooseFirstWeapon => m_Wrapper.m_Player_ChooseFirstWeapon;
         public InputAction @ChooseSecondWeapon => m_Wrapper.m_Player_ChooseSecondWeapon;
         public InputAction @ChooseThirdWeapon => m_Wrapper.m_Player_ChooseThirdWeapon;
+        public InputAction @ChooseFourthWeapon => m_Wrapper.m_Player_ChooseFourthWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1083,6 +1106,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ChooseThirdWeapon.started += instance.OnChooseThirdWeapon;
             @ChooseThirdWeapon.performed += instance.OnChooseThirdWeapon;
             @ChooseThirdWeapon.canceled += instance.OnChooseThirdWeapon;
+            @ChooseFourthWeapon.started += instance.OnChooseFourthWeapon;
+            @ChooseFourthWeapon.performed += instance.OnChooseFourthWeapon;
+            @ChooseFourthWeapon.canceled += instance.OnChooseFourthWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1111,6 +1137,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ChooseThirdWeapon.started -= instance.OnChooseThirdWeapon;
             @ChooseThirdWeapon.performed -= instance.OnChooseThirdWeapon;
             @ChooseThirdWeapon.canceled -= instance.OnChooseThirdWeapon;
+            @ChooseFourthWeapon.started -= instance.OnChooseFourthWeapon;
+            @ChooseFourthWeapon.performed -= instance.OnChooseFourthWeapon;
+            @ChooseFourthWeapon.canceled -= instance.OnChooseFourthWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1256,6 +1285,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnChooseFirstWeapon(InputAction.CallbackContext context);
         void OnChooseSecondWeapon(InputAction.CallbackContext context);
         void OnChooseThirdWeapon(InputAction.CallbackContext context);
+        void OnChooseFourthWeapon(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

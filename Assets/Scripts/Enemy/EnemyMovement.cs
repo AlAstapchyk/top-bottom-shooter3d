@@ -4,6 +4,8 @@ using System.Collections;
 using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -12,18 +14,26 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Transform waypointsParent;
     private Transform[] waypoints;
     private int currentWaypointIndex;
+    private WeaponHolder enemyWeaponHolder;
+    private float enemyWeaponRange;
+    private float distanceToPlayer;
+    private bool isRaycastingForPlayer = false;
+    [SerializeField] private float raycastInterval = 0.2f;
     public enum enemyState
     {
         Patrolling,
         Chasing,
         Returning,
-        Trembling
+        Trembling,
+        Aiming,
+        Attacking
     }
-    private enemyState currentState;
+    [SerializeField] private enemyState currentState;
     
-
+    
     void Start()
     {
+        // Begin patrolling
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentState = enemyState.Patrolling;
         currentWaypointIndex = 0;
@@ -36,16 +46,27 @@ public class EnemyMovement : MonoBehaviour
                 waypoints[i] = waypointsParent.GetChild(i).transform;
             }
         }
-        //Debug.Log(waypoints[0].ToString() + waypoints[1].ToString() + waypoints[2].ToString() + waypoints[3].ToString());
+
+        //
+        enemyWeaponHolder = GetComponentInChildren<WeaponHolder>();
+        enemyWeaponRange = enemyWeaponHolder.GetCurrentWeapon().range;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isRaycastingForPlayer)
+        {
+
+        }
+
+        //Debug.Log(currentState);
 
         switch (currentState)
         {
+            
             case enemyState.Patrolling:
+                if (isRaycastingForPlayer) { if (CheckLOS()) { currentState = enemyState.Chasing; } }
                 if (waypoints != null)
                 {
                     Patrol();
@@ -57,11 +78,15 @@ public class EnemyMovement : MonoBehaviour
             case enemyState.Trembling:
                 StartCoroutine(BulletHitReaction());
                 break;
+            case enemyState.Attacking:
+                AttackPlayer();
+                break;
         }
     }
 
     void Patrol()
     {
+        navMeshAgent.updateRotation = true;
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
             currentWaypointIndex++;
@@ -74,10 +99,62 @@ public class EnemyMovement : MonoBehaviour
     }
     void Chase()
     {
+        navMeshAgent.updateRotation = true;
+        distanceToPlayer = Vector3.Distance(player.position, transform.position);
         if (player != null)
         {
-            navMeshAgent.SetDestination(player.position);
+            if (distanceToPlayer < enemyWeaponRange && CheckLOS())
+            {
+                currentState = enemyState.Attacking;
+            } else
+            {
+                navMeshAgent.SetDestination(player.position);
+            }
         }
+
+    }
+
+    void AttackPlayer()
+    {
+        if (!CheckLOS()) { currentState = enemyState.Chasing; }
+        navMeshAgent.updateRotation = false;
+        RotateTowards(player.position);
+        enemyWeaponHolder.AttackWithReload();
+    }
+
+    // Line of sight to player when player confirmed nearby by trigger enter
+    bool CheckLOS()
+    {
+        
+        Vector3 directionToPlayer = ((player.position + Vector3.up * 0.5f) - (navMeshAgent.transform.position + Vector3.up * 0.5f)).normalized;
+        // Origin and target points are raised slightly because raycast was intersecting with the plane
+
+        if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, 100))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                currentState = enemyState.Chasing;
+                //Debug.Log("LOS confirmed!");
+                return true;
+            }
+            else
+            {
+                //Debug.Log("Line of sight blocked by: " + hit.collider.name);
+                //Debug.Log("Target: " + (player.position + Vector3.up * 0.5f) + "\nOrigin: " + (transform.position + Vector3.up * 0.5f));
+                return false;
+            }
+        }
+        return false;
+    }
+    void RotateTowards(Vector3 targetPosition)
+    {
+        
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        direction.y = 0;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * navMeshAgent.angularSpeed);
+        //Debug.Log(navMeshAgent.angularSpeed);
     }
 
     public void TriggerBulletHitReaction()
@@ -87,15 +164,9 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
-    public void TriggerChaseState()
-    {
-        currentState = enemyState.Chasing;
-    }
+    //public void TriggerChaseState() { currentState = enemyState.Chasing; }
 
-    public void TriggerPatrolState()
-    {
-        currentState = enemyState.Patrolling;
-    }
+    //public void TriggerPatrolState() { currentState = enemyState.Patrolling; }
 
     private IEnumerator BulletHitReaction()
     {
@@ -123,5 +194,20 @@ public class EnemyMovement : MonoBehaviour
         transform.position = originalPosition;
 
     }
+
+    public void StartRaycasting() { 
+        //if (!isRaycastingForPlayer)
+        //{
+        //    isRaycastingForPlayer = true;
+        //    InvokeRepeating(nameof(CheckLOS), 0, raycastInterval);
+        //}
+        isRaycastingForPlayer = true;
+        }
+    public void StopRaycasting() { 
+        isRaycastingForPlayer = false;
+        //CancelInvoke(nameof(CheckLOS));
+        currentState = enemyState.Patrolling;
+    }
+
 }
     
