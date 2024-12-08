@@ -176,6 +176,7 @@ MonoBehaviour:
   - {fileID: 940759293}
   - {fileID: 1474231784}
   nextButton: {fileID: 591772257}
+  nextSceneIndex: 1
 --- !u!1 &99286424
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +821,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e229c7dd22a11004fab9c8afb1cbe9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comicPanel: {fileID: 7928225}
 --- !u!4 &608894028
 Transform:
   m_ObjectHideFlags: 0
@@ -1555,17 +1555,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 608894027}
-        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: StartButton
-        m_Mode: 1
+      - m_Target: {fileID: 7928225}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2058288948
 MonoBehaviour:
