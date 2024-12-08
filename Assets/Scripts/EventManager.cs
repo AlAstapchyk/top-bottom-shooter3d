@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour
 
     public class HealthEvents
     {
+        public UnityEvent<int> OnPlayerHeartsChanged = new UnityEvent<int>();
         public UnityEvent<int> OnPlayerHealthChanged = new UnityEvent<int>();
         public UnityEvent OnPlayerDied = new UnityEvent();
     }
