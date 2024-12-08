@@ -16,7 +16,7 @@ public class PlayerFOVHandler : MonoBehaviour
         }
         else if (weapon is MeleeWeapon meleeWeapon)
         {
-            fieldOfView.UpdateFOV(1f);
+            fieldOfView.UpdateFOV(meleeWeapon.splashAngle);
         }
     }
 }
