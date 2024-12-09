@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1754155781213190100}
   - component: {fileID: 2862636892077799111}
   m_Layer: 8
-  m_Name: ak 47
+  m_Name: ak 47 (Ricochet)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeldByPlayer: 0
-  <weaponName>k__BackingField: Ak 47
+  <weaponName>k__BackingField: Ak 47 (Ric)
   <weight>k__BackingField: 17
   <damage>k__BackingField: 20
   <range>k__BackingField: 20
   <attackCooldown>k__BackingField: 0.12
   muzzleParticlePrefab: {fileID: 6364998999061970003, guid: 259d1129a071b404bb12aa49dd16a734, type: 3}
-  bulletPrefab: {fileID: 2656123227588582477, guid: 985a2c55e9e3c9b4eabe0b6e682a2d73, type: 3}
+  bulletPrefab: {fileID: 2656123227588582477, guid: ab9816e0038e1aa478bd49c517c94de1, type: 3}
   shotAudioPrefab: {fileID: 4087409062682116412, guid: 53cf85bcbbf85a24a894951ed73c7fc7, type: 3}
   muzzleTransf: {fileID: 1508409059783794962}
   weaponMovementHandler: {fileID: 2862636892077799111}
@@ -80,7 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e835460da6868bd4497112566259e694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothingFactor: 0.1
 --- !u!1 &8068791260971119594
 GameObject:
   m_ObjectHideFlags: 0

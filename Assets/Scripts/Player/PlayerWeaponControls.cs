@@ -24,9 +24,9 @@ public class PlayerWeaponControls : MonoBehaviour
 
     private void Update()
     {
-        if (isAttacking)
+        if (isAttacking && playerWeaponHolder)
         {
-            playerWeaponHolder?.Attack();
+            playerWeaponHolder.Attack();
         }
     }
 

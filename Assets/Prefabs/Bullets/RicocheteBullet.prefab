@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 6292986013827355468}
   - component: {fileID: 2272144001967028971}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: RicocheteBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4877,7 +4877,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2656123227588582477}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 69daf73fffde2304daaf74f1fb7fa4f1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4903,7 +4903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b2df758d1774843b117bb111843185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRicochet: 0
+  isRicochet: 1
   impactParticlePrefab: {fileID: 6364998999061970003, guid: f3c4af398d678b147abf25ed2e25d19d, type: 3}
 --- !u!108 &7785920847268830440
 Light:

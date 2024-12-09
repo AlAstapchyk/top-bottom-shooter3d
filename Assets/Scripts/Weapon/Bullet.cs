@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private bool isRicochet;
+    [SerializeField] private GameObject impactParticlePrefab; // Reference to the impact particle prefab
+    private Rigidbody bulletRigidbody;
     private float speed;
     private int damage;
     private float range;
     private float distanceTravelled;
-
-    private Rigidbody bulletRigidbody;
 
     private void Awake()
     {
@@ -37,14 +38,23 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Health health))
+        GameObject go = collision.gameObject;
+        if (impactParticlePrefab != null && go.tag == "Obstacle")
         {
-            health.TakeDamage(damage);
+            Instantiate(impactParticlePrefab, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal));
         }
-        if (collision.gameObject.TryGetComponent(out EnemyMovement enemyMovement))
+
+        if (go.TryGetComponent(out EnemyMovement enemyMovement))
         {
             enemyMovement.TriggerBulletHitReaction();
         }
-        Destroy(gameObject);
+
+        if (go.TryGetComponent(out Health health))
+        {
+            health.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+
+        if (!isRicochet) Destroy(gameObject);
     }
 }

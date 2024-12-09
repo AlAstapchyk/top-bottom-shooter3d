@@ -4,6 +4,9 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private bool isPlayer;
+    [SerializeField] private ParticleSystem damageParticles;
+    [SerializeField] private Transform particleSpawnPoint;
+
     private int currentHealth;
 
     private void Awake()
@@ -15,6 +18,11 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
+
+        if (damageParticles != null && particleSpawnPoint != null)
+        {
+            Instantiate(damageParticles, particleSpawnPoint.position, particleSpawnPoint.rotation);
+        }
 
         if (isPlayer) EventManager.Instance.Health.OnPlayerHealthChanged.Invoke(currentHealth);
 
