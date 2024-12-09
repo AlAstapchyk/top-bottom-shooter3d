@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 86029264}
   - component: {fileID: 86029265}
   - component: {fileID: 86029266}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: DoorTriggerZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2401,7 +2401,7 @@ GameObject:
   - component: {fileID: 823053996}
   - component: {fileID: 823053995}
   - component: {fileID: 823053994}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: InnerTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4765,7 +4765,7 @@ GameObject:
   - component: {fileID: 1447116536}
   - component: {fileID: 1447116535}
   - component: {fileID: 1447116534}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: OuterTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6020,6 +6020,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   isPlayer: 1
+  damageParticles: {fileID: 115431063199260468, guid: e9917f061a771174c9d780f6e9d02995, type: 3}
+  particleSpawnPoint: {fileID: 285113425}
 --- !u!114 &1875679239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6908,7 +6910,7 @@ GameObject:
   - component: {fileID: 2128831710}
   - component: {fileID: 2128831711}
   - component: {fileID: 2128831712}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: DoorTriggerZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10265,6 +10267,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   isPlayer: 0
+  damageParticles: {fileID: 115431063199260468, guid: e9917f061a771174c9d780f6e9d02995, type: 3}
+  particleSpawnPoint: {fileID: 8186765617558237835}
 --- !u!64 &6141470500134852263
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10334,6 +10338,10 @@ PrefabInstance:
     - target: {fileID: 1603127120233004780, guid: f61172d2a22a6ff4d9e51dd24b7c51b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891090866148256620, guid: f61172d2a22a6ff4d9e51dd24b7c51b6, type: 3}
+      propertyPath: <splashAngle>k__BackingField
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3994068634104039275, guid: f61172d2a22a6ff4d9e51dd24b7c51b6, type: 3}
       propertyPath: m_Name
