@@ -14,6 +14,12 @@ public class ButtonSpriteChanger : MonoBehaviour, IPointerEnterHandler, IPointer
             buttonImage = GetComponent<Image>();
     }
 
+    private void OnEnable()
+    {
+        if (normalSprite != null)
+            buttonImage.sprite = normalSprite;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (hoverSprite != null)
