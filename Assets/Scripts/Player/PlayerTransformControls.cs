@@ -28,8 +28,10 @@ public class PlayerTransformControls : MonoBehaviour
 
     private void HandleMovementAndRotation()
     {
+        if (!(playerMovement && playerDirection)) return;
         Vector2 inputMoveVector = playerInputActions.Player.Move.ReadValue<Vector2>();
-        playerMovement?.Move(inputMoveVector * Time.deltaTime);
+
+        playerMovement.Move(inputMoveVector * Time.deltaTime);
 
         // Check for controller input first
         if (isGamepadConnected)
