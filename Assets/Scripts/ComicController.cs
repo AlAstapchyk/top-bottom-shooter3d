@@ -9,6 +9,7 @@ public class ComicController : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private int nextSceneIndex;
     //[SerializeField] private GameObject loadingScreen;
+    [SerializeField] private bool nextScene = true;
 
     private int currentPageIndex = 0;
     private AsyncOperation sceneLoadOperation;
@@ -20,9 +21,11 @@ public class ComicController : MonoBehaviour
 
         if (nextButton != null)
             nextButton.gameObject.SetActive(false);
-
-        sceneLoadOperation = SceneManager.LoadSceneAsync(nextSceneIndex);
-        sceneLoadOperation.allowSceneActivation = false;
+        if (nextScene)
+        {
+            sceneLoadOperation = SceneManager.LoadSceneAsync(nextSceneIndex);
+            sceneLoadOperation.allowSceneActivation = false;
+        }
         ShowFirstPage();
     }
 
@@ -53,7 +56,11 @@ public class ComicController : MonoBehaviour
         else
         {  
             comicPages[comicPages.Length - 1].gameObject.SetActive(true);   //loadingScreen.SetActive(true);
-            sceneLoadOperation.allowSceneActivation = true;
+
+            if(nextScene)
+                sceneLoadOperation.allowSceneActivation = true;
+            else
+                gameObject.SetActive(false);
         }
     }
 }
