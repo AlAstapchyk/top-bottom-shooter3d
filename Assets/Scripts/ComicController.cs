@@ -23,8 +23,13 @@ public class ComicController : MonoBehaviour
             nextButton.gameObject.SetActive(false);
         if (nextScene)
         {
+<<<<<<< Updated upstream:Assets/Scripts/ComicController.cs
             sceneLoadOperation = SceneManager.LoadSceneAsync(nextSceneIndex);
             sceneLoadOperation.allowSceneActivation = false;
+=======
+            //sceneLoadOperation = SceneManager.LoadSceneAsync(nextSceneIndex);
+            SceneManager.LoadScene(nextSceneName);
+>>>>>>> Stashed changes:Assets/Scripts/UI/Comics/ComicController.cs
         }
         ShowFirstPage();
     }
